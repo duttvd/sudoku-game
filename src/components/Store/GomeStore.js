@@ -1,4 +1,5 @@
 
+import { create } from "zustand"
 
 const initialState={
     isStart: false,
@@ -18,3 +19,23 @@ const initialState={
     }
 
 }
+
+const gameState = (set)=>({
+    ...initialState,
+    StartGame:()=>{},
+    tryaAgin:()=>{},
+    PiPause:()=>{},
+    continueGame:()=>{},
+    toogicpencilMode:()=>{},
+    changeQbord:()=>{},
+    resteQbord:()=>{},
+   quitGame:()=>{},
+   setSelecteCell:()=>{},
+    useHint:()=>{},
+    inreaseTime:()=>{},
+    setState:()=>{},
+    
+})
+const usegame = create(gameState)
+
+
