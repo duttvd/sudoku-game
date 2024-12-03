@@ -1,15 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-function Cell({ row, col }) {
+function Cell() {
   return (
-    <div
-      onClick={() => console.log(`Row: ${row}, Col: ${col}`)}
-      className="call select-none flex items-center justify-center cursor-pointer bg-slate-800
-    w-full h-full rounded-md hover:outline outline-[2px]"
-    >1
-      
-    </div>
-  );
+    <div className='call select-none flex items-center justify-center cursor-pointer bg-slate-800
+    w-full h-full rounded-md hover:outline outline-[2px]'>0</div>
+  )
 }
 
-export default Cell;
+export default Cell

@@ -64,38 +64,52 @@ export function inSafe(board, row, col, num) {
     return true;
 }
 
-export function generateSudoku(board, randomArray) {
-    
-    for (let row = 0; row < 9; row++) {
-        for (let col = 0; col < 9; col++) {
-            if (board[row][col] === 0) { 
-                for (let num of randomArray) { 
-                    if (inSafe(board, row, col, num)) { 
-                        board[row][col] = num;
-
-                        
-                        if (generateSudoku(board, randomArray)) {
-                            return true;
+export function genrateSudoku(board,randomArray){
+    for(let row=0;row<9;row++){
+        for(let col = 0;col<9;col++){
+            if(board[row][col]==0){
+                for(let num of randomArray){
+                    if(isSafe(board,row,col,num)){
+                        board[row][col] = num
+                        if(genrateSudoku(board,randomArray)){
+                            return true
                         }
-
-                        board[row][col] = 0;
+                        board[row][col] = 0
                     }
                 }
-                return false;
+                return false
             }
         }
     }
-    return true;
+    return true
+}
+export function removeCells(board,no){
+    for(let x=0;x<no;x++){
+        const row = generateRandom(1,9)-1
+        const col = generateRandom(1,9)-1
+        board[row][col] = 0
+    }
 }
 
-export function sudoku(mode) {
-    const no_of_cell = generateRandom(MODES[mode].value[0], MODES[mode].value[1]);
-    let solvedBoard = Array.from({ length: 9 }, () => Array(9).fill(0));
+export function sudoku(mode){
+    const no_of_cell = generateRandom(MODES[mode].value[0],MODES[mode].value[1])
+    let solvedBoard = Array.from({length:9},()=>Array(9).fill(0))
     let randomArray = [];
-    while (1) {
-        if (randomArray.length == 9) break;
-        const num = generateRandom(1, 9);
-        if (!randomArray.includes(num)) randomArray.push(num);
+    while(1){
+        if(randomArray.length==9)break;
+        const num = generateRandom(1,9)
+        if(!randomArray.includes(num)) randomArray.push(num)
     }
-    generateSudoku(solvedBoard, randomArray);
+    genrateSudoku(solvedBoard,randomArray)
+    let unSolvedBoard = solvedBoard.map(row=>row.map(num=>num))
+    removeCells(unSolvedBoard,no_of_cell)
+    unSolvedBoard = unSolvedBoard.map(row=>{
+        return row.map(num=>{
+            if(!num==0){
+                return { value:num,default:true,pencilValue:0}
+            }
+            return { value:0,default:false,pencilValue:0}
+        })
+    })
+    return {solvedBoard,unSolvedBoard}
 }
