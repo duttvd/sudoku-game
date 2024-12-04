@@ -1,5 +1,5 @@
 import React from 'react';
-import { MODES } from '../Store/Sudokuutils';
+import { MODES } from '../Store/SudokuUtils.js';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {

@@ -1,23 +1,15 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
-import App from './App.jsx';
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-import { Game, Home } from './components/index.js';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import Game from './components/Game/Game';
 
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />  {/* Home page */}
+      <Route path="/game" element={<Game />} />  {/* Game page */}
+    </Routes>
+  );
+}
 
-const routes = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route index element={<Home />} />
-      <Route path="game" element={<Game />} /> 
-      
-    </Route>
-  )
-);
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <RouterProvider router={routes} />
-  </StrictMode>
-);
+export default App;
